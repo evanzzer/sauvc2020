@@ -11,8 +11,8 @@ void controlEffort_callback(const std_msgs::Float64::ConstPtr msg){
     control_effort = msg->data;
 
     mavros_msgs::OverrideRCIn rcin;
-    rcin.channels[0] = control_effort;
-    rcin.channels[1] = control_effort;
+    rcin.channels[0] = 1500 + control_effort;
+    rcin.channels[1] = 1500 + control_effort;
     motor_pub.publish(rcin);
 }
 

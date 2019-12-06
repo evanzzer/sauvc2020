@@ -57,8 +57,8 @@ void joyCallback(const sensor_msgs::Joy::ConstPtr& msg) {
         ROS_INFO("Tenggelam");
     }else if (msg->buttons[1] == 1) {
         mavros_msgs::OverrideRCIn rcin;
-        rcin.channels[4] = 1600;
-        rcin.channels[5] = 1600;
+        rcin.channels[4] = 1400;
+        rcin.channels[5] = 1400;
         override_publisher.publish(rcin);
         ROS_INFO("Angkat");
     }

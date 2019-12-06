@@ -169,6 +169,10 @@ target_link_libraries(setpoint ${catkin_LIBRARIES})
 add_executable(kualifikasi_PID_controleffort src/kualifikasi_PID_controleffort.cpp)
 target_link_libraries(kualifikasi_PID_controleffort ${catkin_LIBRARIES})
 
+add_executable(maju-mundur src/maju-mundur.cpp)
+target_link_libraries(maju-mundur ${catkin_LIBRARIES})
+
+
 #############
 ## Install ##
 #############
