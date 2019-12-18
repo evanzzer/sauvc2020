@@ -59,15 +59,12 @@ int main(int argc, char **argv){
 
     motor_pub = nh.advertise<mavros_msgs::OverrideRCIn>("/mavros/rc/override", 8);
 
-    std::chrono::milliseconds ms(1000);
-    while(1){
-        turun(ms);
-        delay(1000);
-        naik(ms);
-        delay(1000);
-        maju(ms);
-        delay(1000);
-        mundur(ms);
-        delay(1000);
-    }  
+	while(1){
+        mavros_msgs::OverrideRCIn rcin;
+        rcin.channels[3] = 1400;
+        rcin.channels[4] = 1400;
+        rcin.channels[5] = 1400;
+        rcin.channels[6] = 1400;
+        motor_pub.publish(rcin);	
+}
 }

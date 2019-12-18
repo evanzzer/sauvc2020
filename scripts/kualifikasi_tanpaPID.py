@@ -17,18 +17,16 @@ while not rospy.is_shutdown():
         if sensor.read():
                 if(sensor.pressure()<50):
                         # rcin = OverrideRCIn()
-                        # rcin.channels[0] = 1600
-                        # rcin.channels[1] = 1600
+                        # rcin.channels[5] = 1600
+                        # rcin.channels[6] = 1600
                         # override_publisher.publish(rcin)
                         print("turun")
                 else:
                         # rcin = OverrideRCIn()
-                        # rcin.channels[0] = 0
-                        # rcin.channels[1] = 0
+                        # rcin.channels[1] = 1600
                         # rcin.channels[2] = 1600
                         # rcin.channels[3] = 1600
                         # rcin.channels[4] = 1600
-                        # rcin.channels[5] = 1600
                         # override_publisher.publish(rcin)
                         print("MAJU")
         else:
