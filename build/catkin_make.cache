@@ -1,0 +1,2 @@
+pid:sauvc2020
+-DCATKIN_DEVEL_PREFIX=/home/amvui/sauvc_ws/devel -DCMAKE_INSTALL_PREFIX=/home/amvui/sauvc_ws/install -G Unix Makefiles
