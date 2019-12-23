@@ -113,10 +113,8 @@ generate_messages(
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-#  INCLUDE_DIRS include
-#  LIBRARIES sauvc
-#  CATKIN_DEPENDS roscpp rospy std_msgs
-#  DEPENDS system_lib
+DEPENDS
+roscpp
 )
 
 ###########
@@ -169,8 +167,11 @@ target_link_libraries(setpoint ${catkin_LIBRARIES})
 add_executable(kualifikasi_PID_controleffort src/kualifikasi_PID_controleffort.cpp)
 target_link_libraries(kualifikasi_PID_controleffort ${catkin_LIBRARIES})
 
-add_executable(maju-mundur src/maju-mundur.cpp)
-target_link_libraries(maju-mundur ${catkin_LIBRARIES})
+add_executable(majumundur src/majumundur.cpp)
+target_link_libraries(majumundur ${catkin_LIBRARIES})
+
+add_executable(killswitchh src/killswitchh.cpp)
+target_link_libraries(killswitchh ${catkin_LIBRARIES})
 
 
 #############

@@ -1,4 +1,5 @@
 <launch>
     <node pkg="sauvc" name="camera" type="camera.py" output="screen"/>
     <node pkg="sauvc" name="color_detection" type="color_detection.py" output="screen"/>
+<node pkg="sauvc" name="simple_out" type="simple_out.py" output="screen"/>
 </launch>
