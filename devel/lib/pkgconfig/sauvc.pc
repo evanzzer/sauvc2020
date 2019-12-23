@@ -1,8 +1,0 @@
-prefix=/home/amvui/sauvc_ws/devel
-
-Name: sauvc
-Description: Description of sauvc
-Version: 0.0.0
-Cflags: -I/home/amvui/sauvc_ws/devel/include
-Libs: -L/home/amvui/sauvc_ws/devel/lib 
-Requires: roscpp
