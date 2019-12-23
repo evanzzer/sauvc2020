@@ -62,12 +62,8 @@ int main(int argc, char **argv){
     std::chrono::milliseconds ms(1000);
     while(1){
         turun(ms);
-        delay(1000);
         naik(ms);
-        delay(1000);
         maju(ms);
-        delay(1000);
         mundur(ms);
-        delay(1000);
     }  
 }
