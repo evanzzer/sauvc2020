@@ -10,7 +10,7 @@ if __name__  == '__main__':
     rospy.init_node("camera")
     image_publisher = rospy.Publisher("/auv/image", Image, queue_size=8)
     compressed_image_publisher = rospy.Publisher("/auv/image/compressed", CompressedImage, queue_size=8)
-    cap = cv2.VideoCapture(2)
+    cap = cv2.VideoCapture(0)
     bridge = CvBridge()
     while not rospy.is_shutdown():
         _, data = cap.read()

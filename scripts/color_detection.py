@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from __future__ import division #ini gatau buat apaan
+#ini gatau buat apaan
 import cv2
 import numpy as np
 import time #ini buat print fps
@@ -17,6 +17,8 @@ def nothing(*arg):
 
 if __name__ == '__main__':
     rospy.init_node('color_detection', anonymous=True)
+
+    loc_publisher = rospy.Publisher("state/misi1", Float64, queue_size=8)
 
     # loc_publisher = rospy.Publisher('/auv/xloc', lokasi, queue_size=8)
     image_subscriber = rospy.Subscriber('/auv/image', Image, nothing)
@@ -83,8 +85,8 @@ if __name__ == '__main__':
         frameblurmerah = cv2.GaussianBlur(mask_merah,(9,9), 0)
         frameblurbiru = cv2.GaussianBlur(mask_biru,(9,9), 0)
 
-        cv2.imshow('Merah', frameblurmerah)
-        cv2.imshow('Biru', frameblurbiru)
+        cv2.imshow('Merah', mask_merah)
+        cv2.imshow('Biru', mask_biru)
 
         # kontoru
         contours, _ = cv2.findContours(mask_merah, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)[-2:]
@@ -113,7 +115,18 @@ if __name__ == '__main__':
             tinggii = int(s/2)
             # cv2.line(frame, (x+lebar, 0), (x+lebar, 640), (255, 0, 0), 1)
 
-            cv2.line(frame, (x+lebar, y+tinggi), (p+lebarr, q+tinggii), (0,0,0), 3)
+            x1_kotak = x+lebar
+            x2_kotak = p+lebarr
+
+            if(x1_kotak>x2_kotak):
+                x_garis_tengah = (x1_kotak + x2_kotak)/2
+            elif(x1_kotak<=x2_kotak):
+                x_garis_tengah = (x2_kotak + x1_kotak)/2
+
+            loc_publisher.publish(x_garis_tengah)
+
+            cv2.line(frame, (x1_kotak, y+tinggi), (x2_kotak, q+tinggii), (0,0,0), 3)
+            cv2.line(frame, (x_garis_tengah, 0), (x_garis_tengah, 640), (0,0,0), 3)
 
             state = Float64()
             # state.data = posisinya
