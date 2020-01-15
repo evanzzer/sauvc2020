@@ -1,14 +1,15 @@
 #!/usr/bin/env python
 
 from std_msgs.msg import Int64
-from mavros_msgs.msg import OverrideRCIn()
+from mavros_msgs.msg import OverrideRCIn
 import rospy
 
-int control_effort
+def callbacknya(state):
+    if(state.data <= 320): print("kanan")
+    elif(state.data > 320): print("kiri")
 
-def CF_callback(cf):
-    rcin = OverrideRCIn()
-    for i in range (0, 8): rcin.channels[i] = 1500
-    rcin.channels[] = 1500 + cf.data
-
+if __name__ == '__main__':
+    rospy.init_node('motor_misi1', anonymous=True)
+    image_subscriber = rospy.Subscriber('state/misi1', Int64, callbacknya)
+    rospy.spin()
  
