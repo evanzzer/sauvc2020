@@ -7,7 +7,7 @@ import time #ini buat print fps
 import rospy
 from cv_bridge import CvBridge, CvBridgeError
 from sensor_msgs.msg import Image, CompressedImage
-from std_msgs.msg import Float64
+from std_msgs.msg import Int64
 # from SAUVC-2020.msg import lokasi
 
 fps = ' '
@@ -18,12 +18,9 @@ def nothing(*arg):
 if __name__ == '__main__':
     rospy.init_node('color_detection', anonymous=True)
 
-    loc_publisher = rospy.Publisher("state/misi1", Float64, queue_size=8)
+    loc_publisher = rospy.Publisher("state/misi1", Int64, queue_size=8)
 
-    # loc_publisher = rospy.Publisher('/auv/xloc', lokasi, queue_size=8)
     image_subscriber = rospy.Subscriber('/auv/image', Image, nothing)
-
-    # state_publisher = rospy.Publisher("state", Float64, 8)
 
     cv2.namedWindow('Merah')
     cv2.namedWindow('Biru')
@@ -106,14 +103,12 @@ if __name__ == '__main__':
             cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
             lebar = int(w/2)
             tinggi = int(h/2)
-            # cv2.line(frame, (x+lebar, 0), (x+lebar, 640), (255, 0, 0), 1)
 
             # bound box buat warna biru
             p,q,r,s = cv2.boundingRect(biggestt_contourr)
             cv2.rectangle(frame, (p, q), (p+r, q+s), (255, 0, 0), 2)
             lebarr = int(r/2)
             tinggii = int(s/2)
-            # cv2.line(frame, (x+lebar, 0), (x+lebar, 640), (255, 0, 0), 1)
 
             x1_kotak = x+lebar
             x2_kotak = p+lebarr
@@ -123,21 +118,15 @@ if __name__ == '__main__':
             elif(x1_kotak<=x2_kotak):
                 x_garis_tengah = (x2_kotak + x1_kotak)/2
 
-            loc_publisher.publish(x_garis_tengah)
+            # INI PUBLISH GARIS TENGAH
+            state = Int64()
+            state.data = x_garis_tengah
+            loc_publisher.publish(state)
+            # print(state.data)
 
+            #INI BUAT PRINT GARIS GARIS
             cv2.line(frame, (x1_kotak, y+tinggi), (x2_kotak, q+tinggii), (0,0,0), 3)
             cv2.line(frame, (x_garis_tengah, 0), (x_garis_tengah, 640), (0,0,0), 3)
-
-            state = Float64()
-            # state.data = posisinya
-            # state_publisher.publish(state)
-
-            # xlocation = lokasi()
-            # xlocation.xloc = x+lebar
-            # loc_publisher.publish(xlocation)
-
-            # p,q,r,s = cv2.boundingRect(second_biggest)
-            # cv2.rectangle(frame, (p, q), (p+r, q+s), (0, 0, 255), 2)
 
             #print fps
             cv2.putText(frame, fps, (10,25), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,0,255), 1)

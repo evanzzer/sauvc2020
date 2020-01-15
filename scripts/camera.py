@@ -9,19 +9,13 @@ import numpy as np
 rospy.init_node("camera")
 image_publisher = rospy.Publisher("/auv/image", Image, queue_size=8)
 # compressed_image_publisher = rospy.Publisher("/auv/image/compressed", CompressedImage, queue_size=8)
-cap = cv2.VideoCapture(0, cv2.CAP_V4L)
+cap = cv2.VideoCapture(0)
 bridge = CvBridge()
 try:
-    while True:
+    while not rospy.is_shutdown():
         # print("apap")
         _, data = cap.read()
         imgmsg = bridge.cv2_to_imgmsg(data, "bgr8")
-
         image_publisher.publish(imgmsg) # publish image biasa
-<<<<<<< HEAD
-        compressed_image_publisher.publish(msg) # publish image yg ke compressed
-=======
-        # compressed_image_publisher.publish(msg) # publish image yg ke compressed
 except:
     cap.release()
->>>>>>> 89b95a3f07f2fa4fde27bfe2131731e8de811041
