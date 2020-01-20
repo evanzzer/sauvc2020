@@ -1,0 +1,5 @@
+<launch>
+    <node pkg="sauvc" name="camera" type="camera.py" output="screen"/>
+    <node pkg="sauvc" name="misi2" type="misi2.py" output="screen"/>
+    <!--<node pkg="sauvc" name="setpoint" type="setpoint" output="screen"/>-->
+</launch>

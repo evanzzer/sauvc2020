@@ -10,7 +10,7 @@ sensor = ms5837.MS5837_02BA(1) # Default I2C bus is 1 (Raspberry Pi 3)
 if __name__ == '__main__':
     rospy.init_node('kualifikasi_PID', anonymous=True)
 
-    state_publisher = rospy.Publisher("state", Float64, queue_size=8)
+    state_publisher = rospy.Publisher("kualifikasi/state", Float64, queue_size=8)
     # controleffort_subscriber = rospy.Subscriber("control_effort", Float64, control_effort_callback)
 
     # inisialisasi

@@ -43,7 +43,7 @@ int main(int argc, char **argv){
 
     motor_pub = nh.advertise<mavros_msgs::OverrideRCIn>("/mavros/rc/override", 8);
 
-    ros::Subscriber controleffort_sub = nh.subscribe("control_effort", 8, controlEffort_callback);
+    ros::Subscriber controleffort_sub = nh.subscribe("kualifikasi/control_effort", 8, controlEffort_callback);
     start();
     ros::spin();
 }

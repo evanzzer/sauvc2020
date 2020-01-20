@@ -18,7 +18,7 @@ def nothing(*arg):
 if __name__ == '__main__':
     rospy.init_node('color_detection', anonymous=True)
 
-    loc_publisher = rospy.Publisher("state/misi1", Int64, queue_size=8)
+    loc_publisher = rospy.Publisher("misi1/state", Int64, queue_size=8)
 
     image_subscriber = rospy.Subscriber('/auv/image', Image, nothing)
 

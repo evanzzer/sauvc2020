@@ -169,12 +169,9 @@ target_link_libraries(kualifikasi_PID_controleffort ${catkin_LIBRARIES})
 
 add_executable(majumundur src/majumundur.cpp)
 target_link_libraries(majumundur ${catkin_LIBRARIES})
-<<<<<<< HEAD
-=======
 
-add_executable(killswitchh src/killswitchh.cpp)
-target_link_libraries(killswitchh ${catkin_LIBRARIES})
->>>>>>> 89b95a3f07f2fa4fde27bfe2131731e8de811041
+add_executable(misi1_motor src/misi1_motor.cpp)
+target_link_libraries(misi1_motor ${catkin_LIBRARIES})
 
 
 #############
