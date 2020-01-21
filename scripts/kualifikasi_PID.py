@@ -81,4 +81,5 @@ if __name__ == '__main__':
     sleep(2)
     tread = threading.Thread(target=naikturun)
     tread.start()
+    rospy.spin()
     

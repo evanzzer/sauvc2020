@@ -63,10 +63,10 @@ while not rospy.is_shutdown():
     h_high = 164
     s_high = 174
     v_high = 190
-    print("low ", end='')
-    print((h_low, s_low, v_low))
-    print("high ", end='')
-    print((h_high, s_high, v_high))
+    # print("low ", end='')
+    # print((h_low, s_low, v_low))
+    # print("high ", end='')
+    # print((h_high, s_high, v_high))
     cv2.circle(new_img, (x,y), 5, (255, 255, 255), thickness=1, lineType=8, shift=0)
     mask1 = cv2.inRange(new_img, (h_low, s_low, v_low), (h_high, s_high, v_high))
     kernel = np.ones((15, 2) ,np.uint8)
