@@ -90,12 +90,12 @@ if __name__ == '__main__':
 
             if x == 320:
                 #rcin = OverrideRCIn()
-                #rcin.channels[0] = 1500
                 #rcin.channels[1] = 1500
-                #rcin.channels[2] = 1550
+                #rcin.channels[2] = 1500
                 #rcin.channels[3] = 1550
                 #rcin.channels[4] = 1550
                 #rcin.channels[5] = 1550
+                #rcin.channels[6] = 1550
                 rospy.loginfo("Maju")
                 print(x)
                 #motor_pub.publish(rcin)

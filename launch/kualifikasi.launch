@@ -2,7 +2,7 @@
     <node pkg="sauvc" name="kualifikasi_PID" type="kualifikasi_PID.py" output="screen"/>
     <node pkg="sauvc" name="setpoint" type="setpoint" output="screen"/>
 
-    <node name="kualifikasi_PID_controleffort" pkg="sauvc" type="kualifikasi_PID_controleffort" >
+    <node name="kualifikasi_PID1" pkg="sauvc" type="kualifikasi_PID.py" >
       <param name="Kp" value="5.0" />
       <param name="Ki" value="0.0" />
       <param name="Kd" value="0.1" />
