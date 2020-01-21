@@ -41,12 +41,12 @@ if __name__ == '__main__':
         frame = bridge.imgmsg_to_cv2(gambarmsgs)
 
         timeCheck = time.time() #FPS
-        lowHue_kuning = cv2.getTrackbarPos('lowHue', 'kuning')
-        lowSat_kuning = cv2.getTrackbarPos('lowSat', 'kuning')
-        lowVal_kuning = cv2.getTrackbarPos('lowVal', 'kuning')
-        highHue_kuning = cv2.getTrackbarPos('highHue', 'kuning')
-        highSat_kuning = cv2.getTrackbarPos('highSat', 'kuning')
-        highVal_kuning = cv2.getTrackbarPos('highVal', 'kuning')
+        lowHue_kuning = -15.5
+        lowSat_kuning = -15.7
+        lowVal_kuning = -17.3
+        highHue_kuning = 64.5 
+        highSat_kuning = 64.3
+        highVal_kuning = 63.5
 
         frameHSV = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
