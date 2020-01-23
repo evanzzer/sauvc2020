@@ -36,12 +36,13 @@ def naikturun():
     global tread_active
     while not rospy.is_shutdown():
         if not tread_active:
-            if sensor.read():
-                state = Float64()
-                state.data = sensor.pressure()
-                print(state)
-                state_publisher(state)
-                sleep(0.2)
+            continue
+        if sensor.read():
+            state = Float64()
+            state.data = sensor.pressure()
+            print(state)
+            state_publisher(state)
+            sleep(0.2)
 
 
 def killcallback(msg):
