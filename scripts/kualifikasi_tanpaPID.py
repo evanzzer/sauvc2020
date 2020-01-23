@@ -114,4 +114,3 @@ if __name__ == '__main__':
     tread = threading.Thread(target=naikturun)
     tread.start()
     rospy.spin()
-    
