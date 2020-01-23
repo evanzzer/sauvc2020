@@ -5,10 +5,15 @@ import time
 import rospy
 from std_msgs.msg import Float64, Int16
 from mavros_msgs.msg import OverrideRCIn
+import threading
 
-sensor = ms5837.MS5837_02BA(1) # Default I2C bus is 1 (Raspberry Pi 3)
+sensor = ms5837.MS5837_02BA() # Default I2C bus is 1 (Raspberry Pi 3)
 motor_pub = None
 kecepatan = 1600
+
+if not sensor.init():
+    print ("Sensor could not be initialized")
+    exit(1)
 
 def control_effort_callback(msg):
     control_effort = msg.data
@@ -35,14 +40,16 @@ def start():
 def naikturun():
     global tread_active
     while not rospy.is_shutdown():
+        print("MASUK")
         if not tread_active:
+            print("MASUK LAGI")
             if sensor.read():
+                print("MASUKLAGILAGI")
                 state = Float64()
                 state.data = sensor.pressure()
                 print(state)
                 state_publisher(state)
-                sleep(0.2)
-
+                time.sleep(2)
 
 def killcallback(msg):
 	oke = msg.data
@@ -51,7 +58,6 @@ def killcallback(msg):
 		global tread_active
 		tread_active = False
 		global prev_callback_state
-		
 		if oke == prev_callback_state:
 			return
 		prev_callback_state = 0
@@ -73,13 +79,13 @@ if __name__ == '__main__':
 
     # inisialisasi
     if not sensor.init():
-        print "Sensor could not be initialized"
+        print ("Sensor could not be initialized")
         exit(1)
     release()
-    sleep(2)
+    time.sleep(2)
     start()
-    sleep(2)
+    time.sleep(2)
+    print("TEST")
     tread = threading.Thread(target=naikturun)
     tread.start()
     rospy.spin()
-    
