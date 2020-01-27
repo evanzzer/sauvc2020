@@ -54,6 +54,11 @@ def naikturun():
 		# start()
 		# refreshed= False
         if sensor.read():
+		waktusekarang = time.time()
+		if(waktusekarang%2 == 0):
+			file1 = open("data_press.txt", "a")
+			file1.write(str(sensor.pressure()) + "\n")
+			file1.close()
 		rospy.loginfo("pressure = " + str(sensor.pressure()))
                 if((sensor.pressure() >= 50)):
                         state = 1
