@@ -60,9 +60,11 @@ def get_video_type(filename):
 directory = os.path.join('/home/amvui/sauvc_ws/src/sauvc2020/scripts', filename)
 print(directory)
 fourcc = cv2.VideoWriter_fourcc(*'X264')
-out = cv2.VideoWriter(directory, fourcc, 30, (640, 480))
-
+out = cv2.VideoWriter(directory, fourcc, 12, (640, 480))
+import time
 try:
+    awal = time.time()
+    counter = 0
     while not rospy.is_shutdown():
         msgnya = rospy.wait_for_message('/auv/image', Image)
         bridge = CvBridge()
@@ -70,5 +72,12 @@ try:
         frame = framenya
         # _, frame = cap.read()
         out.write(frame)
+	akhir = time.time()
+        if akhir - awal < 1:
+	    counter += 1
+        else:
+            print(counter)
+            counter = 0
+            awal = time.time()
 except KeyboardInterrupt:
     out.release()
