@@ -117,7 +117,7 @@ def naikturun():
 def killcallback(msg):
 	oke = msg.data
 	if(oke==0):
-		# rospy.loginfo("islive")
+		rospy.loginfo("islive")
 		global tread_active
 		tread_active = False
 		global prev_callback_state
@@ -127,7 +127,7 @@ def killcallback(msg):
 		prev_callback_state = 0
 		start()
 	else:
-		# rospy.loginfo("isDead")
+		rospy.loginfo("isDead")
 		global tread_active
 		tread_active = True
 		global prev_callback_state
