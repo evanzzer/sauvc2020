@@ -3,14 +3,17 @@
 #ini gatau buat apaan
 import cv2
 import numpy as np
-import time #ini buat print fps
+import time
 import rospy
 from cv_bridge import CvBridge, CvBridgeError
 from sensor_msgs.msg import Image, CompressedImage
-from std_msgs.msg import Int64
+from std_msgs.msg import Int64, Float64
+from sauvc.msg import Kontrol
 # from SAUVC-2020.msg import lokasi
 
 fps = ' '
+
+loc_publisher = None
 
 def nothing(*arg):
     pass
@@ -19,8 +22,8 @@ if __name__ == '__main__':
     rospy.init_node('color_detection', anonymous=True)
 
     loc_publisher = rospy.Publisher("misi1/state", Int64, queue_size=8)
-
     image_subscriber = rospy.Subscriber('/auv/image', Image, nothing)
+    controleffort_subscriber = rospy.Subscriber("misi1/control_effort", Float64, control_effort_callback, queue_size=10)
 
     cv2.namedWindow('Merah')
     cv2.namedWindow('Biru')

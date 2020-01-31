@@ -17,15 +17,6 @@ kecepatan = 1600
 
 def control_effort_callback(msg):
     control_effort = msg.data
-    rcin = OverrideRCIn()
-    rcin.channels[1] = 1500 + control_effort
-    rcin.channels[4] = 1500 + control_effort
-    rcin.channels[0] = kecepatan
-    rcin.channels[2] = kecepatan
-    rcin.channels[3] = kecepatan
-    rcin.channels[5] = kecepatan
-    motor_pub.publish(rcin)
-    time.sleep(0.5)
 
 def release():
     rcin = OverrideRCIn()
@@ -37,10 +28,10 @@ def start():
     rcin = OverrideRCIn()
     for i in range (0, 8): rcin.channels[i] = 1500
     rospy.loginfo("Start")
-    rcin.channels[0] = kecepatan
-    rcin.channels[2] = kecepatan
-    rcin.channels[3] = kecepatan
-    rcin.channels[5] = kecepatan
+    # rcin.channels[0] = kecepatan
+    # rcin.channels[2] = kecepatan
+    # rcin.channels[3] = kecepatan
+    # rcin.channels[5] = kecepatan
     motor_pub.publish(rcin)
     # rospy.loginfo("MAJU")
 
@@ -55,9 +46,9 @@ def naikturun():
             refreshed = True
             continue
 	# rospy.loginfo("paan")
-	if(refreshed):
-		start()
-		refreshed= False
+	    if(refreshed):
+		    start()
+		    refreshed= False
         if sensor.read():
             waktusekarang = time.time()
             print(str(int(waktusekarang)))
@@ -71,6 +62,15 @@ def naikturun():
             status = Float64()
             status.msg = int(sensor.pressure())
             state_publisher.publish(status)
+
+            rcin = OverrideRCIn()
+            rcin.channels[1] = 1500 + control_effort
+            rcin.channels[4] = 1500 + control_effort
+            rcin.channels[0] = kecepatan
+            rcin.channels[2] = kecepatan
+            rcin.channels[3] = kecepatan
+            rcin.channels[5] = kecepatan
+            motor_pub.publish(rcin)
                 
 def killcallback(msg):
 	oke = msg.data
@@ -98,8 +98,8 @@ if __name__ == '__main__':
     motor_pub = rospy.Publisher("/mavros/rc/override", OverrideRCIn, queue_size=10)
     controleffort_subscriber = rospy.Subscriber("kualifikasi/control_effort", Float64, control_effort_callback, queue_size=10)
     killswitch_sub = rospy.Subscriber("kill_switch", Int16, killcallback, queue_size=10)
-    time.sleep(5)
     
+    time.sleep(5)
     # inisialisasi
     if not sensor.init():
         print "Sensor could not be initialized"

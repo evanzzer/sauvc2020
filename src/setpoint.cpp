@@ -51,8 +51,10 @@ int main(int argc, char** argv)
 
   std_msgs::Float64 setpoint;
   std_msgs::Int64 setpoint_misi1;
-  setpoint.data = 50;
+
+  setpoint.data = 1100;
   setpoint_misi1.data = 320;
+  
   ros::Publisher setpoint_pub = setpoint_node.advertise<std_msgs::Float64>("kualifikasi/setpoint", 1);
   ros::Publisher setpoint_pub_misi1 = setpoint_node.advertise<std_msgs::Int64>("misi1/setpoint", 1);
 

@@ -116,6 +116,7 @@ generate_messages(
 catkin_package(
 DEPENDS
 roscpp
+CATKIN_DEPENDS message_runtime
 )
 
 ###########
