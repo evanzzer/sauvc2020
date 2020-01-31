@@ -16,6 +16,7 @@ find_package(catkin REQUIRED COMPONENTS
   genmsg
   mavros_msgs
   dynamic_reconfigure
+  message_generation
 )
 
 find_package(
@@ -49,7 +50,7 @@ find_package(
 ##   * add "message_generation" and every package in MSG_DEP_SET to
 ##     find_package(catkin REQUIRED COMPONENTS ...)
 ##   * add "message_runtime" and every package in MSG_DEP_SET to
-##     catkin_package(CATKIN_DEPENDS ...)
+##     catkin_package(CATKIN_DEPENDS message_runtime ...)
 ##   * uncomment the add_*_files sections below as needed
 ##     and list every .msg/.srv/.action file to be processed
 ##   * uncomment the generate_messages entry below
@@ -58,7 +59,7 @@ find_package(
 ## Generate messages in the 'msg' folder
 add_message_files(
   FILES
-  lokasi.msg
+  Kontrol.msg
 )
 
 ## Generate services in the 'srv' folder

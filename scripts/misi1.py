@@ -63,12 +63,10 @@ if __name__ == '__main__':
         highSat_biru = cv2.getTrackbarPos('highSat', 'Biru')
         highVal_biru = cv2.getTrackbarPos('highVal', 'Biru')
 
-
         # _, frame = vidCapture.read()
         # cv2.imshow('original', frame)
 
         frameHSV = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-
 
         colorLow_merah = np.array([lowHue_merah, lowSat_merah, lowVal_merah])
         colorHigh_merah = np.array([highHue_merah, highSat_merah, highVal_merah])

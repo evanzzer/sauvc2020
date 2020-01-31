@@ -34,8 +34,7 @@ if __name__ == '__main__':
     rospy.init_node("killswitch")
     switch_publisher = rospy.Publisher("kill_switch", Int16, queue_size=8)
     prev_value = None
-
-
+    
     # Pin Setup:
     GPIO.setmode(GPIO.BCM)  # BCM pin-numbering scheme from Raspberry Pi
     GPIO.setup(input_pin, GPIO.IN)  # set pin as an input pin

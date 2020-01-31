@@ -1,0 +1,7 @@
+<launch>
+<include file="$(find mavros)/launch/apm.launch"/>
+    <node pkg="sauvc" name="kualifikasi_PID" type="kualifikasi_PID.py" output="screen"/>
+    <node pkg="sauvc" name="killswitch" type="killswitch.py" output="screen"/>
+    <node pkg="sauvc" name="camera" type="camera.py" output="screen"/>
+    <node pkg="sauvc" name="record" type="record.py" output="screen"/>
+</launch>
