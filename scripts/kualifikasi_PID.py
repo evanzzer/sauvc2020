@@ -17,6 +17,7 @@ kecepatan = 1600
 
 def control_effort_callback(msg):
     control_effort = msg.data
+    # print("MASUKWOI")
 
 def release():
     rcin = OverrideRCIn()
@@ -40,6 +41,7 @@ def naikturun():
     # rospy.loginfo("sini")
     prev_state = -1
     refreshed = False
+    tread_active = True
     while not rospy.is_shutdown():
         if not tread_active:
             prev_state = -1
@@ -51,26 +53,30 @@ def naikturun():
 		    refreshed= False
         if sensor.read():
             waktusekarang = time.time()
-            print(str(int(waktusekarang)))
+            # print(str(int(waktusekarang)))
             now = datetime.now()
             current_time = now.strftime("%H:%M:%S")
-            print("Current Time =", current_time)
+            # print("Current Time =", current_time)
             file1 = open("/home/amvui/sauvc_ws/src/sauvc2020/scripts/data_press.txt", "a")
             file1.write(current_time + "DEPTH:  " + str(sensor.pressure()) + "\n")
             file1.close()
                 
             status = Float64()
-            status.msg = int(sensor.pressure())
+            status.data = int(sensor.pressure())
             state_publisher.publish(status)
+            # rospy.loginfo("PUBLISH")
 
             rcin = OverrideRCIn()
-            rcin.channels[1] = 1500 + control_effort
-            rcin.channels[4] = 1500 + control_effort
+            rcin.channels[1] = 1600 + control_effort
+            rcin.channels[4] = 1600 + control_effort
             rcin.channels[0] = kecepatan
             rcin.channels[2] = kecepatan
             rcin.channels[3] = kecepatan
             rcin.channels[5] = kecepatan
+            rcin.channels[6] = kecepatan
+            rcin.channels[7] = kecepatan
             motor_pub.publish(rcin)
+            print("test")
                 
 def killcallback(msg):
 	oke = msg.data
@@ -94,11 +100,11 @@ def killcallback(msg):
 if __name__ == '__main__':
     rospy.init_node('kualifikasi_PID', anonymous=True)
 
-    state_publisher = rospy.Publisher("kualifikasi/state", Float64, queue_size=8)
+    state_publisher = rospy.Publisher("/kualifikasi/state", Float64, queue_size=8)
     motor_pub = rospy.Publisher("/mavros/rc/override", OverrideRCIn, queue_size=10)
-    controleffort_subscriber = rospy.Subscriber("kualifikasi/control_effort", Float64, control_effort_callback, queue_size=10)
-    killswitch_sub = rospy.Subscriber("kill_switch", Int16, killcallback, queue_size=10)
-    
+    controleffort_subscriber = rospy.Subscriber("/kualifikasi/control_effort", Float64, control_effort_callback, queue_size=10)
+    # killswitch_sub = rospy.Subscriber("kill_switch", Int16, killcallback, queue_size=10)
+    rospy.loginfo("TESTaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
     time.sleep(5)
     # inisialisasi
     if not sensor.init():

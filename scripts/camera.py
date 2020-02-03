@@ -33,7 +33,7 @@ try:
 	output = cv2.resize(data, dsize)
         imgmsg = bridge.cv2_to_imgmsg(data, "bgr8")
         image_publisher.publish(imgmsg) # publish image biasa
-	cv2.imshow("test", output)
+	# cv2.imshow("test", output)
 	cv2.waitKey(30)
 except:
     cap.release()

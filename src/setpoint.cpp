@@ -55,8 +55,8 @@ int main(int argc, char** argv)
   setpoint.data = 1100;
   setpoint_misi1.data = 320;
   
-  ros::Publisher setpoint_pub = setpoint_node.advertise<std_msgs::Float64>("kualifikasi/setpoint", 1);
-  ros::Publisher setpoint_pub_misi1 = setpoint_node.advertise<std_msgs::Int64>("misi1/setpoint", 1);
+  ros::Publisher setpoint_pub = setpoint_node.advertise<std_msgs::Float64>("/kualifikasi/setpoint", 1);
+  ros::Publisher setpoint_pub_misi1 = setpoint_node.advertise<std_msgs::Int64>("/misi1/setpoint", 1);
 
   ros::Rate loop_rate(0.2);  // change setpoint every 5 seconds
 
@@ -64,9 +64,9 @@ int main(int argc, char** argv)
   {
     ros::spinOnce();
     setpoint_pub.publish(setpoint);  // publish twice so graph gets it as a step
-    setpoint_pub_misi1.publish(setpoint_misi1);
-    // setpoint.data = 0 - setpoint.data;
-    // setpoint_pub.publish(setpoint);
+    // setpoint_pub_misi1.publish(setpoint_misi1);
+    setpoint.data = 0 - setpoint.data;
+    setpoint_pub.publish(setpoint);
 
     loop_rate.sleep();
   }

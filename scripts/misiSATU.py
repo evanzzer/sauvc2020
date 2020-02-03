@@ -18,6 +18,8 @@ loc_pub = None
 kontrol_pub = None
 kecepatan = 1600
 toleransi = 20
+control_effort = None
+status = None
 
 def control_effort_callback(msg):
     control_effort = msg.data
