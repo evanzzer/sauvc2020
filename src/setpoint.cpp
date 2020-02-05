@@ -52,7 +52,7 @@ int main(int argc, char** argv)
   std_msgs::Float64 setpoint;
   std_msgs::Int64 setpoint_misi1;
 
-  setpoint.data = 1100;
+  setpoint.data = 1030;
   setpoint_misi1.data = 320;
   
   ros::Publisher setpoint_pub = setpoint_node.advertise<std_msgs::Float64>("/kualifikasi/setpoint", 1);
@@ -65,9 +65,10 @@ int main(int argc, char** argv)
     ros::spinOnce();
     setpoint_pub.publish(setpoint);  // publish twice so graph gets it as a step
     // setpoint_pub_misi1.publish(setpoint_misi1);
-    setpoint.data = 0 - setpoint.data;
-    setpoint_pub.publish(setpoint);
+    //setpoint.data = 0 - setpoint.data;
+    //setpoint_pub.publish(setpoint);
 
     loop_rate.sleep();
+    ros::spin();
   }
 }

@@ -1,5 +1,5 @@
 <launch>
-<include file="$(find mavros)/launch/apm.launch"/>
+<!--<include file="$(find mavros)/launch/apm.launch"/>-->
   <!-- <node pkg="sauvc" name="majumundur" type="majumundur.py" output="screen"/>-->
     
    <!-- <node pkg="sauvc" name="killswitch" type="killswitch.py" output="screen"/>-->
