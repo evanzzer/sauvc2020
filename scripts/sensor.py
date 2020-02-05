@@ -16,7 +16,7 @@ if not sensor.init():
 
 while not rospy.is_shutdown():
     if sensor.read():
-        print("P: %0.1f") % (sensor.pressure())
+        # print("P: %0.1f") % (sensor.pressure())
         status = Float64()
         status.data = sensor.pressure()
         statepub.publish(status)

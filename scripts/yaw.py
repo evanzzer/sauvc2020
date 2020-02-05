@@ -6,16 +6,18 @@ import rospy
 pertama = None
 
 def compass_callback(msg):
+	global pertama
 	yaw = msg.data
+	# print(yaw)
 	if(pertama==None):
 		pertama = yaw
 	
 	status = Float64()
-	status.msg = pertama
+	status.data = pertama
 	compass_pub.publish(status)
 
 	status_state = Float64()
-	status_state.msg = yaw
+	status_state.data = yaw
 	compass_pub_state.publish(status_state)
 
 
