@@ -1,10 +1,12 @@
 <launch>
 <include file="$(find mavros)/launch/apm.launch"/>
    <!--<node pkg="sauvc" name="killswitch" type="killswitch.py" output="screen"/>-->
-   <node pkg="sauvc" name="camera" type="camera.py" output="screen"/>
-   <node pkg="sauvc" name="record" type="record.py" output="screen"/>
-   <node pkg="sauvc" name="sensor" type="sensor.py" output="screen"/>
+    <node pkg="sauvc" name="camera" type="camera.py" output="screen"/>
+    <node pkg="sauvc" name="record" type="record.py" output="screen"/>
+    <node pkg="sauvc" name="sensor" type="sensor.py" output="screen"/>
     <node pkg="sauvc" name="setpoint" type="setpoint" output="screen"/>
+    <node pkg="sauvc" name="yaw" type="yaw.py" output="screen">
+
     <node name="controller" pkg="pid" type="controller" ns="kualifikasi" output="screen">
       <param name="Kp" value="50.0" />
       <param name="Ki" value="0.0" />
@@ -15,5 +17,17 @@
       <param name="max_loop_frequency" value="100.0" />
       <param name="min_loop_frequency" value="100.0" />
     </node>
+
+    <node name="controller_compass" pkg="pid" type="controller" ns="kualifikasi" output="screen">
+      <param name="Kp" value="50.0" />
+      <param name="Ki" value="0.0" />
+      <param name="Kd" value="0.1" />
+      <param name="upper_limit" value="30" />
+      <param name="lower_limit" value="-30" />
+      <param name="windup_limit" value="10" />
+      <param name="max_loop_frequency" value="100.0" />
+      <param name="min_loop_frequency" value="100.0" />
+    </node>
+
     <node name="kualifikasi" pkg="sauvc" type="kualifikasi_PID.py" output="screen"/>
 </launch>

@@ -23,24 +23,12 @@ def controleffort_compass_callback(msg):
 def control_effort_callback(msg):
     global control_effort
     control_effort = msg.data
-    # print(control_effort)
 
 def release():
     rcin = OverrideRCIn()
     for i in range (0, 8): rcin.channels[i] = 1500
     rospy.loginfo("release")
     motor_pub.publish(rcin)
-
-def start():
-    rcin = OverrideRCIn()
-    for i in range (0, 8): rcin.channels[i] = 1500
-    rospy.loginfo("Start")
-    # rcin.channels[0] = kecepatan
-    # rcin.channels[2] = kecepatan
-    # rcin.channels[3] = kecepatan
-    # rcin.channels[5] = kecepatan
-    motor_pub.publish(rcin)
-    # rospy.loginfo("MAJU")
 
 def naikturun():
     global tread_active
@@ -76,23 +64,13 @@ def naikturun():
 
             rcin = OverrideRCIn()
             print(control_effort)
-            if(controleffort_compass_callback > abs(50)):
-                rcin.channels[1] = 1500
-                rcin.channels[4] = 1500
-                rcin.channels[0] = 1500 - control_effort_compass
-                rcin.channels[2] = 1500 - control_effort_compass
-                rcin.channels[3] = 1500 + control_effort_compass
-                rcin.channels[5] = 1500 - control_effort_compass
-                rcin.channels[6] = kecepatan
-                rcin.channels[7] = kecepatan
-                continue
 
             rcin.channels[1] = 1500 + control_effort
             rcin.channels[4] = 1500 + control_effort
-            rcin.channels[0] = kecepatan
-            rcin.channels[2] = 1350
-            rcin.channels[3] = kecepatan
-            rcin.channels[5] = kecepatan
+            rcin.channels[0] = kecepatan - controleffort_compass_callback
+            rcin.channels[2] = 1350 + controleffort_compass_callback
+            rcin.channels[3] = kecepatan + controleffort_compass_callback
+            rcin.channels[5] = kecepatan + controleffort_compass_callback
             rcin.channels[6] = kecepatan
             rcin.channels[7] = kecepatan
             motor_pub.publish(rcin)
@@ -122,7 +100,6 @@ def killcallback(msg):
 if __name__ == '__main__':
     rospy.init_node('kualifikasi_PID', anonymous=True)
 
-    # state_publisher = rospy.Publisher("/kualifikasi/state", Float64, queue_size=8)
     motor_pub = rospy.Publisher("/mavros/rc/override", OverrideRCIn, queue_size=10)
     controleffort_compass_sub = rospy.Subscriber("/compass/control_effort", Float64, controleffort_compass_callback, queue_size=10)
     controleffort_subscriber = rospy.Subscriber("/kualifikasi/control_effort", Float64, control_effort_callback, queue_size=10)
