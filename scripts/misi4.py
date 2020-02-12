@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+#BELOM ADA PID
+
 from __future__ import division #ini gatau buat apaan
 import cv2
 import numpy as np
