@@ -33,15 +33,17 @@ cv2.namedWindow("clahe")
 cv2.createTrackbar("x", "Trackbar" , 0, 1024, nothing)
 cv2.createTrackbar("y", "Trackbar" , 0, 768, nothing)
 TH = 40
-vid = cv2.VideoCapture(0)
+vid = cv2.imread('/home/nathan/Pictures/1.png')
 bridge = CvBridge()
 
 while not rospy.is_shutdown():
     x = cv2.getTrackbarPos("x", "Trackbar")
     y = cv2.getTrackbarPos("y", "Trackbar")
     # img = cv2.imread('gambar.png')
-    success, img = vid.read()
-    new_img = img.copy()
+    # success, img = vid.read()
+    # if img is None:
+    #     continue
+    new_img = vid.copy()
     new_img = RecoverCLAHE(new_img)
 
     imgmsg = bridge.cv2_to_imgmsg(new_img, "bgr8")
