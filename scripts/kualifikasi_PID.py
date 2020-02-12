@@ -13,10 +13,12 @@ prev_callback_state = -1
 motor_pub = None
 state_publisher = None
 control_effort = 0
+control_effort_compass = 0
 kecepatan = 1650
 tread_active = True
 
 def controleffort_compass_callback(msg):
+    print("MASUK SINI WOI")
     global control_effort_compass
     control_effort_compass = msg.data
 
@@ -35,11 +37,12 @@ def naikturun():
     # rospy.loginfo("sini")
     prev_state = -1
     refreshed = False
-    tread_active = False
+    tread_active = True
     # print("aaaa")
     while not rospy.is_shutdown():
         # print("t")
         if not tread_active:
+            print("MATI")
             prev_state = -1
             refreshed = True
             continue
@@ -63,14 +66,14 @@ def naikturun():
             # rospy.loginfo("PUBLISH")
 
             rcin = OverrideRCIn()
-            print(control_effort)
+            # print(control_effort)
 
             rcin.channels[1] = 1500 + control_effort
             rcin.channels[4] = 1500 + control_effort
-            rcin.channels[0] = kecepatan - controleffort_compass_callback
-            rcin.channels[2] = 1350 + controleffort_compass_callback
-            rcin.channels[3] = kecepatan + controleffort_compass_callback
-            rcin.channels[5] = kecepatan + controleffort_compass_callback
+            rcin.channels[0] = kecepatan - control_effort_compass
+            rcin.channels[2] = 1350 + control_effort_compass
+            rcin.channels[3] = kecepatan + control_effort_compass
+            rcin.channels[5] = kecepatan + control_effort_compass
             rcin.channels[6] = kecepatan
             rcin.channels[7] = kecepatan
             motor_pub.publish(rcin)
