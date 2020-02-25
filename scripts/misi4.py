@@ -179,7 +179,7 @@ def naikturun():
                 rcin.channels[5] = 1500 - 20
                 rcin.channels[6] = 1500
                 rcin.channels[7] = 1500
-                rospy.loginfo("Belok Kiri")
+                rospy.loginfo("GANEMU")
                 print(x)
                 motor_pub.publish(rcin)
 

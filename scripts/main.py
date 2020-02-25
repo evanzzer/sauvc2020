@@ -55,13 +55,13 @@ while not rospy.is_shutdown():
     hue = np.mean(roi[:,:, 0])
     sat = np.mean(roi[:,:, 1])
     val = np.mean(roi[:,:, 2])
-    h_low = hue - TH
-    h_high = hue + TH
-    s_low = sat - TH
-    s_high = sat + TH
-    v_low = val - TH
-    v_high = val + TH
-    print(h_low, h_high, s_high, s_low, v_high,v_low)
+    h_low = 76
+    h_high = 121
+    s_low = 65
+    s_high = 158
+    v_low = 22
+    v_high = 191
+    # print(h_low, h_high, s_high, s_low, v_high,v_low)
     # h_low = 74
     # s_low = 84
     # v_low = 100

@@ -1,6 +1,6 @@
 <launch>
-    <node pkg="sauvc" name="killswitch" type="killswitch.py" output="screen"/>
-    <node pkg="sauvc" name="main" type="main.py" output="screen"/>
+    <!--<node pkg="sauvc" name="killswitch" type="killswitch.py" output="screen"/>-->
+    <node pkg="sauvc" name="main_cam" type="main_cam.py" output="screen"/>
     <node pkg="sauvc" name="misi4" type="misi4.py" output="screen"/>
     <!--<node pkg="sauvc" name="setpoint" type="setpoint" output="screen"/>-->
 </launch>

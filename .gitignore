@@ -332,3 +332,4 @@ ASALocalRun/
 .vscode/settings.json
 
 *.avi
+launch/.vscode/c_cpp_properties.json
