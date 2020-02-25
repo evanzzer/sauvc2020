@@ -18,7 +18,7 @@ kecepatan = 1650
 tread_active = True
 
 def controleffort_compass_callback(msg):
-    print("MASUK SINI WOI")
+    # print("MASUK SINI WOI")
     global control_effort_compass
     control_effort_compass = msg.data
 
@@ -37,7 +37,7 @@ def naikturun():
     # rospy.loginfo("sini")
     prev_state = -1
     refreshed = False
-    tread_active = True
+    tread_active = False
     # print("aaaa")
     while not rospy.is_shutdown():
         # print("t")
@@ -71,13 +71,13 @@ def naikturun():
             rcin.channels[1] = 1500 + control_effort
             rcin.channels[4] = 1500 + control_effort
             rcin.channels[0] = kecepatan - control_effort_compass
-            rcin.channels[2] = 1350 + control_effort_compass
+            rcin.channels[2] = 1350 + control_effort_compass # 3 FASANYA BELOM DIBALIK
             rcin.channels[3] = kecepatan + control_effort_compass
             rcin.channels[5] = kecepatan + control_effort_compass
             rcin.channels[6] = kecepatan
             rcin.channels[7] = kecepatan
             motor_pub.publish(rcin)
-            # print("test")
+            # print(rcin.channels[0])
         time.sleep(0.2)
                 
 def killcallback(msg):

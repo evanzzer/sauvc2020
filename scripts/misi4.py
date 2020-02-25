@@ -152,6 +152,7 @@ def naikturun():
                     rcin.channels[6] = 1500
                     rcin.channels[7] = 1500
                     rospy.loginfo("Belok Kanan")
+                    # cv2.imshow('original', frame)
                     print(x)
                     motor_pub.publish(rcin)
 

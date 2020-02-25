@@ -26,12 +26,12 @@ image_publisher = rospy.Publisher("/auv/image", Image, queue_size=8)
 
 np.seterr(over='ignore')
 # cv2.startWindowThread()
-# cv2.namedWindow("Trackbar")
+cv2.namedWindow("Trackbar")
 # cv2.namedWindow("apa")
-# cv2.namedWindow("op")
-# cv2.namedWindow("clahe")
-# cv2.createTrackbar("x", "Trackbar" , 0, 1024, nothing)
-# cv2.createTrackbar("y", "Trackbar" , 0, 768, nothing)
+cv2.namedWindow("op")
+cv2.namedWindow("clahe")
+cv2.createTrackbar("x", "Trackbar" , 0, 1024, nothing)
+cv2.createTrackbar("y", "Trackbar" , 0, 768, nothing)
 TH = 40
 vid = cv2.VideoCapture(0)
 bridge = CvBridge()
@@ -55,13 +55,13 @@ while not rospy.is_shutdown():
     hue = np.mean(roi[:,:, 0])
     sat = np.mean(roi[:,:, 1])
     val = np.mean(roi[:,:, 2])
-    h_low = 76
-    h_high = 121
-    s_low = 65
-    s_high = 158
-    v_low = 22
-    v_high = 191
-    # print(h_low, h_high, s_high, s_low, v_high,v_low)
+    h_low = hue - TH
+    h_high = hue + TH
+    s_low = sat - TH
+    s_high = sat + TH
+    v_low = val - TH
+    v_high = val + TH
+    print(h_low, h_high, s_high, s_low, v_high,v_low)
     # h_low = 74
     # s_low = 84
     # v_low = 100
@@ -76,7 +76,7 @@ while not rospy.is_shutdown():
     mask1 = cv2.inRange(new_img, (h_low, s_low, v_low), (h_high, s_high, v_high))
     kernel = np.ones((15, 2) ,np.uint8)
     erosion = cv2.erode(mask1,kernel,iterations = 1)
-    _, contours, _= cv2.findContours(erosion, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+    (_,contours,hierarchy)= cv2.findContours(erosion, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
     for cnt in contours:
         area = cv2.contourArea(cnt)
         if area < 200:
